@@ -61,12 +61,12 @@ class Person {
     }
 }//Person
 
-const David = new Person('David', 28);//creating a new Person
-David.eat('pizza');//giving said Person something to eat
-console.log(David.stomach);//verifying .eat works
-David.poop();//emptying stomach
-console.log(David.stomach);//verifying .poop works
-console.log(David.toString());//verifying .toString works
+const david = new Person('David', 28);//creating a new Person
+david.eat('pizza');//giving said Person something to eat
+console.log(david.stomach);//verifying .eat works
+david.poop();//emptying stomach
+console.log(david.stomach);//verifying .poop works
+console.log(david.toString());//verifying .toString works
 
 
 /*
@@ -106,13 +106,13 @@ class Car {
   }//drive
 }//Car
 
-const Honda = new Car ('Pilot', 20);//creating a new object with class of Car
-Honda.fill(22);//filling up tank
-console.log(Honda.tank);//verifying tank was filled
-Honda.drive(400);//driving 400 miles
-console.log(Honda.odometer);//checking odometer
-console.log(Honda.tank);//checking leftover gallons left in tank
-Honda.drive(40);
+const honda = new Car ('Pilot', 20);//creating a new object with class of Car
+honda.fill(22);//filling up tank
+console.log(honda.tank);//verifying tank was filled
+honda.drive(400);//driving 400 miles
+console.log(honda.odometer);//checking odometer
+console.log(honda.tank);//checking leftover gallons left in tank
+honda.drive(40);
 
 /*
   TASK 3
@@ -132,19 +132,20 @@ class Lambdasian {
     this.age = attributes.age;
     this.location = attributes.location;
   }
+
   speak(){
     return `Hello my name is ${this.name}, I am from ${this.location}.`
   }
 }//Lambdasian
 
-const David2 = new Lambdasian({
+const david2 = new Lambdasian({
   name: 'David',
   age: 28,
   location: 'California',
 });
 
-console.log(David2.age)//checking if constructor works
-console.log(David2.speak())//checking the speak() method works
+console.log(david2.age)//checking if constructor works
+console.log(david2.speak())//checking the speak() method works
 
 /*
   TASK 4
@@ -160,9 +161,41 @@ console.log(David2.speak())//checking the speak() method works
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian{
+  constructor(attributes){
+    super(attributes);
+    this.specialty = attributes.specialty;
+    this.favLanguage = attributes.favLanguage;
+    this.catchPhrase = attributes.catchPhrase;
+  }//constructor
 
+  demo(subject){
+    return `Today we are learning about ${subject}`
+  }
+
+  grade(student, subject){
+    return `${student.name} receives a perfect score on ${subject}`
+  }
+}//Instructor
+
+const instructorOne = new Instructor({
+  name: 'Bob',
+  age: 35,
+  location: 'Oregon',
+  specialty: 'Biology',
+  favLanguage: 'English',
+  catchPhrase: 'whats up guys?',
+})
+
+const studentOne = {
+  name: 'Tony',
+  age: 15,
 }
+
+console.log(instructorOne);//checking that instructorOne was created and all key-values are displaying.
+console.log(instructorOne.catchPhrase);//checking that catchphrase works
+console.log(instructorOne.demo('History'));//checking the demo method works
+console.log(instructorOne.grade(studentOne, 'Literature'));//checking the grade method works
 
 /*
   TASK 5
