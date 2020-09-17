@@ -42,7 +42,32 @@ class Airplane {
 
 class Person {
 
-}
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+    }
+
+    eat(someFood){
+      if(this.stomach.length <= 10){
+      return this.stomach.push(someFood);
+    }//if
+  }//eat
+    poop(){
+      return this.stomach = [];
+    }
+    toString(){
+      return `${this.name}, ${this.age}`;
+    }
+}//Person
+
+const David = new Person('David', 28);//creating a new Person
+David.eat('pizza');//giving said Person something to eat
+console.log(David.stomach);//verifying .eat works
+David.poop();//emptying stomach
+console.log(David.stomach);//verifying .poop works
+console.log(David.toString());//verifying .toString works
+
 
 /*
   TASK 2
@@ -59,8 +84,35 @@ class Person {
 */
 
 class Car {
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
 
-}
+  fill(gallons){
+    return this.tank += gallons;
+  }
+
+  drive(distance){
+    if (this.tank >= distance/this.milesPerGallon){
+      this.odometer += distance;
+      this.tank -= distance/this.milesPerGallon;
+    }
+    else if (this.tank <= 0){
+      return console.log(`I ran out of fuel at ${this.odometer} miles!`)
+    }
+  }//drive
+}//Car
+
+const Honda = new Car ('Pilot', 20);//creating a new object with class of Car
+Honda.fill(22);//filling up tank
+console.log(Honda.tank);//verifying tank was filled
+Honda.drive(400);//driving 400 miles
+console.log(Honda.odometer);//checking odometer
+console.log(Honda.tank);//checking leftover gallons left in tank
+Honda.drive(40);
 
 /*
   TASK 3
@@ -75,8 +127,24 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
+  constructor(attributes){
+    this.name = attributes.name;
+    this.age = attributes.age;
+    this.location = attributes.location;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}.`
+  }
+}//Lambdasian
 
-}
+const David2 = new Lambdasian({
+  name: 'David',
+  age: 28,
+  location: 'California',
+});
+
+console.log(David2.age)//checking if constructor works
+console.log(David2.speak())//checking the speak() method works
 
 /*
   TASK 4
