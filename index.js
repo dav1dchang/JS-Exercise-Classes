@@ -170,11 +170,11 @@ class Instructor extends Lambdasian{
   }//constructor
 
   demo(subject){
-    return `Today we are learning about ${subject}`
+    return `Today we are learning about ${subject}`;
   }
 
   grade(student, subject){
-    return `${student.name} receives a perfect score on ${subject}`
+    return `${student.name} receives a perfect score on ${subject}`;
   }
 }//Instructor
 
@@ -187,15 +187,15 @@ const instructorOne = new Instructor({
   catchPhrase: 'whats up guys?',
 })
 
-const studentOne = {
-  name: 'Tony',
-  age: 15,
-}
+//const studentOne = {
+ // name: 'Tony',
+ // age: 15,
+//}
 
 console.log(instructorOne);//checking that instructorOne was created and all key-values are displaying.
 console.log(instructorOne.catchPhrase);//checking that catchphrase works
 console.log(instructorOne.demo('History'));//checking the demo method works
-console.log(instructorOne.grade(studentOne, 'Literature'));//checking the grade method works
+console.log(instructorOne.grade(david2, 'Literature'));//checking the grade method works
 
 /*
   TASK 5
@@ -212,9 +212,41 @@ console.log(instructorOne.grade(studentOne, 'Literature'));//checking the grade 
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
+class Student extends Lambdasian{
+  constructor(attributes){
+    super(attributes);
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+  }//constructor
 
-}
+  listSubjects(){
+    return this.favSubjects.join(', ');
+  }
+
+  prAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+
+  sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+}//Student
+
+const newStudent = new Student({
+  name: 'Tom',
+  age: 20,
+  location: 'California',
+  previousBackground: 'chef',
+  className: 'CS132',
+  favSubjects: ['HTML', 'CSS', 'JS'],
+})
+
+console.log(newStudent);//making sure newStudent displays correctly
+console.log(newStudent.age);//checking a specific key-value pair
+console.log(newStudent.listSubjects());//checking the listSubjects method works
+console.log(newStudent.prAssignment('History'));//checking prAssignment method works
+console.log(newStudent.sprintChallenge('Math'));//checking sprintChallenge method works
 
 /*
   TASK 6
