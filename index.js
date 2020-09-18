@@ -49,7 +49,7 @@ class Person {
     }
 
     eat(someFood){
-      if(this.stomach.length <= 10){
+      if(this.stomach.length < 10){
       return this.stomach.push(someFood);
     }//if
   }//eat
@@ -96,23 +96,24 @@ class Car {
   }
 
   drive(distance){
-    if (this.tank >= distance/this.milesPerGallon){
+    if (this.tank > (distance/this.milesPerGallon)){
       this.odometer += distance;
-      this.tank -= distance/this.milesPerGallon;
+      this.tank -= (distance/this.milesPerGallon);
     }
-    else if (this.tank <= 0){
-      return console.log(`I ran out of fuel at ${this.odometer} miles!`)
+    else if (this.tank <= (distance/this.milesPerGallon)){
+      this.odometer = this.odometer + (this.tank * this.milesPerGallon);
+      this.tank -= this.tank;
+      return `I ran out of fuel at ${this.odometer} miles!`
     }
   }//drive
 }//Car
 
-const honda = new Car ('Pilot', 20);//creating a new object with class of Car
-honda.fill(22);//filling up tank
+const honda = new Car ('Pilot', 10);//creating a new object with class of Car
+honda.fill(20);//filling up tank
 console.log(honda.tank);//verifying tank was filled
-honda.drive(400);//driving 400 miles
+console.log(honda.drive(200));//distance argument = 200
 console.log(honda.odometer);//checking odometer
 console.log(honda.tank);//checking leftover gallons left in tank
-honda.drive(40);
 
 /*
   TASK 3
@@ -187,15 +188,10 @@ const instructorOne = new Instructor({
   catchPhrase: 'whats up guys?',
 })
 
-//const studentOne = {
- // name: 'Tony',
- // age: 15,
-//}
-
 console.log(instructorOne);//checking that instructorOne was created and all key-values are displaying.
 console.log(instructorOne.catchPhrase);//checking that catchphrase works
-console.log(instructorOne.demo('History'));//checking the demo method works
-console.log(instructorOne.grade(david2, 'Literature'));//checking the grade method works
+console.log(instructorOne.demo('history'));//checking the demo method works
+console.log(instructorOne.grade(david2, 'literature'));//checking the grade method works
 
 /*
   TASK 5
@@ -224,9 +220,9 @@ class Student extends Lambdasian{
     return this.favSubjects.join(', ');
   }
 
-  prAssignment(subject){
+  PRAssignment(subject){
     return `${this.name} has submitted a PR for ${subject}`;
-  }
+  }//initially wrote 'PRAssignment' as 'prAssignment' since we were taught capitalizing indicates a class and is bad practice, but it would not pass the test without the capitals
 
   sprintChallenge(subject){
     return `${this.name} has begun sprint challenge on ${subject}`;
@@ -245,7 +241,7 @@ const newStudent = new Student({
 console.log(newStudent);//making sure newStudent displays correctly
 console.log(newStudent.age);//checking a specific key-value pair
 console.log(newStudent.listSubjects());//checking the listSubjects method works
-console.log(newStudent.prAssignment('History'));//checking prAssignment method works
+console.log(newStudent.PRAssignment('History'));//checking prAssignment method works
 console.log(newStudent.sprintChallenge('Math'));//checking sprintChallenge method works
 
 /*
@@ -261,9 +257,36 @@ console.log(newStudent.sprintChallenge('Math'));//checking sprintChallenge metho
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager extends Instructor{
+  constructor(attributes){
+    super(attributes);
+    this.gradClassName = attributes.gradClassName;
+    this.favInstructor = attributes.favInstructor;
+  }//constructor
 
-}
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+
+  debugsCode(student, subject){
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
+}//ProjectManager
+
+const newProjectManagerOne = new ProjectManager({
+  name: 'Jeff',
+  age: 45,
+  location: 'New York',
+  specialty: 'React',
+  favLanguage: 'Spanish',
+  catchPhrase: 'Can you dig it?',
+  gradClassName: 'CS1',
+  favInstructor: 'Sean',
+})
+
+console.log(newProjectManagerOne.gradClassName);//checking a specific key-pair value
+console.log(newProjectManagerOne.standUp('web36'));//checking standUp standUp method
+console.log(newProjectManagerOne.debugsCode(newStudent.name, 'chemistry'));//checking debugsCode method
 
 /*
   STRETCH PROBLEM (no tests!)
